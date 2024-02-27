@@ -1,6 +1,7 @@
 <script lang="ts">
     import axios from "axios";
     import { onMount } from "svelte";
+    import { fade, fly } from "svelte/transition";
 
     let term = "";
     let photos: {
@@ -41,6 +42,8 @@
                 src={photo.urls.regular}
                 alt={photo.alt_description}
                 class="image"
+                in:fly={{ y: 200, duration: 2000, delay: i * 200 }}
+                out:fade
             />
         {/each}
     </div>
