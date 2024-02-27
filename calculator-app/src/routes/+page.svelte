@@ -6,12 +6,51 @@
     let display = "";
     let firstNumber = "";
     let secondNumber = "";
+    let isDisplayingResults = false;
 
     const handleOperationClick = (operation: string) => {
+        if (!firstNumber) return;
+        if (operation === "=") {
+            if (!secondNumber) return;
+            const firstNum = parseInt(firstNumber);
+            const secondNum = parseInt(secondNumber);
+
+            let results = "";
+
+            switch (selectedOperation) {
+                case "÷":
+                    results = (firstNum / secondNum).toFixed(2);
+                    break;
+                case "x":
+                    results = (firstNum * secondNum).toFixed(2);
+                    break;
+                case "+":
+                    results = (firstNum + secondNum).toFixed(2);
+                    break;
+                case "-":
+                    results = (firstNum - secondNum).toFixed(2);
+                    break;
+            }
+
+            display = results;
+            isDisplayingResults = true;
+        }
+
         selectedOperation = operation;
     };
 
+    const handleClear = () => {
+        firstNumber = "";
+        secondNumber = "";
+        selectedOperation = "";
+        display = "";
+        isDisplayingResults = false;
+    };
+
     const handleNumberClick = (number: string) => {
+        if (isDisplayingResults) {
+            handleClear();
+        }
         if (display === "" && number === "0") return;
         if (number === "." && display.includes(".")) return;
 
@@ -40,7 +79,7 @@
         </div>
         <div class="digits">
             <div class="numbers">
-                <button class="btn btn-xlg"> C </button>
+                <button class="btn btn-xlg" on:click={handleClear}> C </button>
                 {#each numbers as number (number)}
                     <button
                         class={`btn ${number === "0" ? "btn-lg" : null}`}
