@@ -1,23 +1,67 @@
 <script lang="ts">
     const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."];
     const operations = ["÷", "x", "+", "-", "="];
+
+    let selectedOperation = "";
+    let display = "";
+    let firstNumber = "";
+    let secondNumber = "";
+
+    const handleOperationClick = (operation: string) => {
+        selectedOperation = operation;
+    };
+
+    const handleNumberClick = (number: string) => {
+        if (display === "" && number === "0") return;
+        if (number === "." && display.includes(".")) return;
+
+        if (!selectedOperation) {
+            if (display === "" && number === ".") {
+                firstNumber = "0.";
+                return (display = firstNumber);
+            }
+            firstNumber = `${firstNumber}${number}`;
+            return (display = firstNumber);
+        } else {
+            if (display === "" && number === ".") {
+                secondNumber = "0.";
+                return (display = secondNumber);
+            }
+            secondNumber = `${secondNumber}${number}`;
+            return (display = secondNumber);
+        }
+    };
 </script>
 
 <main>
     <div class="calculator">
-        <div class="results"></div>
+        <div class="results">
+            {display}
+        </div>
         <div class="digits">
             <div class="numbers">
                 <button class="btn btn-xlg"> C </button>
                 {#each numbers as number (number)}
-                    <button class={`btn ${number === "0" ? "btn-lg" : null}`}>
+                    <button
+                        class={`btn ${number === "0" ? "btn-lg" : null}`}
+                        on:click={() => handleNumberClick(number)}
+                    >
                         {number}
                     </button>
                 {/each}
             </div>
             <div class="operations">
                 {#each operations as operation (operation)}
-                    <button class="btn btn-orange"> {operation} </button>
+                    <button
+                        class={`btn ${
+                            operation === selectedOperation
+                                ? "btn-silver"
+                                : "btn-orange"
+                        }`}
+                        on:click={() => handleOperationClick(operation)}
+                    >
+                        {operation}
+                    </button>
                 {/each}
             </div>
         </div>
