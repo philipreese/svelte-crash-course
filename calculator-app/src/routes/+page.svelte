@@ -1,2 +1,28 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<main>
+    <div class="calculator">
+        <div class="results"></div>
+        <div class="digits">
+            <div class="numbers">
+                <button> C </button>
+                <button> 1 </button>
+                <button> 2 </button>
+                <button> 3 </button>
+                <button> 4 </button>
+                <button> 5 </button>
+                <button> 6 </button>
+                <button> 7 </button>
+                <button> 8 </button>
+                <button> 9 </button>
+                <button> 0 </button>
+                <button> . </button>
+            </div>
+            <div class="operations">
+                <button> ÷ </button>
+                <button> x </button>
+                <button> + </button>
+                <button> - </button>
+                <button> = </button>
+            </div>
+        </div>
+    </div>
+</main>
