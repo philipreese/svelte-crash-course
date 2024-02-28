@@ -3,7 +3,7 @@
     interface Quiz {
         id: number;
         name: String;
-        imageUrl: "chemistry" | "biology";
+        imageUrl: keyof typeof images;
         questions: {
             id: number;
             text: string;
