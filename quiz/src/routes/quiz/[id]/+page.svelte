@@ -1,1 +1,5 @@
-<div>Quiz Page</div>
+<script lang="ts">
+    export let data: any;
+</script>
+
+<div>{data.name}</div>

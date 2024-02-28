@@ -1,5 +1,7 @@
 <script lang="ts">
     import * as images from "../image";
+    import { goto } from "$app/navigation";
+
     interface Quiz {
         id: number;
         name: String;
@@ -15,8 +17,9 @@
     export let quiz: Quiz;
 </script>
 
-<div
+<button
     class="quiz-card shadow w-[250px] rounded overflow-hidden cursor-pointer m-2"
+    on:click={() => goto(`/quiz/${quiz.id}`)}
 >
     <img src={images[quiz.imageUrl]} alt={quiz.name.toString()} class="h-44" />
     <div class="flex items-center justify-between py-3 px-2">
@@ -27,4 +30,4 @@
                 : ""}
         </p>
     </div>
-</div>
+</button>
