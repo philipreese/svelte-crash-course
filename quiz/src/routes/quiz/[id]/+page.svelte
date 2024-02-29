@@ -15,6 +15,12 @@
         selectedOption = label;
     };
 
+    const handleNext = () => {
+        showCorrectAnswer = false;
+        selectedOption = null;
+        currentQuestionIndex++;
+    };
+
     const handleSubmit = () => {
         if (!selectedOption) return;
 
@@ -47,5 +53,5 @@
             />
         {/each}
     </div>
-    <QuestionButton {handleSubmit} />
+    <QuestionButton {handleSubmit} {showCorrectAnswer} {handleNext} />
 </div>
