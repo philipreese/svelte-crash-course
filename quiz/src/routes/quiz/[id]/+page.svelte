@@ -9,9 +9,22 @@
     let currentQuestionIndex = 0;
     let answersValue: Answer[];
     let selectedOption: null | string = null;
+    let showCorrectAnswer: boolean;
 
     const handleChangeOption = (label: string) => {
         selectedOption = label;
+    };
+
+    const handleSubmit = () => {
+        if (!selectedOption) return;
+
+        showCorrectAnswer = true;
+        answers.update((currentState) => {
+            const updatedAnswerState = currentState;
+            updatedAnswerState[currentQuestionIndex].isCorrect =
+                selectedOption === question.answer;
+            return updatedAnswerState;
+        });
     };
 
     answers.subscribe((value) => {
@@ -25,8 +38,14 @@
     <QuestionText text={question.question} />
     <div class="flex justify-between flex-wrap cursor-pointer">
         {#each question.options as option (option.id)}
-            <QuestionOption {option} {selectedOption} {handleChangeOption} />
+            <QuestionOption
+                {option}
+                {selectedOption}
+                {handleChangeOption}
+                {showCorrectAnswer}
+                answer={question.answer}
+            />
         {/each}
     </div>
-    <QuestionButton />
+    <QuestionButton {handleSubmit} />
 </div>
